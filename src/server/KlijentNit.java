@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -90,14 +91,25 @@ public class KlijentNit extends Thread {
                             List<AbstractObject> listaRezervacija = Kontroler.getInstance().pretraziRezervacije((String) kt.getParametar());
                             st.setPodaci(listaRezervacija);
                             break;
-                            case Konstante.KREIRAJ_REZERVACIJU_SKIJA:
+                        case Konstante.KREIRAJ_REZERVACIJU_SKIJA:
                             AbstractObject rs = Kontroler.getInstance().kreirajRezervacijuSkija((RezervacijaSkija) kt.getParametar());
                             st.setPodaci(rs);
                             break;
-                            case Konstante.ZAPAMTI_REZERVACIJU_SKIJA:
+                        case Konstante.ZAPAMTI_REZERVACIJU_SKIJA:
                             AbstractObject rezerv = Kontroler.getInstance().zapamtiRezervacijuSkija((RezervacijaSkija) kt.getParametar());
                             st.setPodaci(rezerv);
                             break;
+                        case Konstante.UCITAJ_LISTU_REZERVACIJA:
+                            List<AbstractObject> listaRez = Kontroler.getInstance().ucitajListuRezervacija();
+                            st.setPodaci(listaRez);
+                            break;
+                        case Konstante.OBRISI_REZERVACIJU_VOZNJE:
+                            List<AbstractObject> listaBris = Kontroler.getInstance().obrisiRezervaciju((RezervacijaSkija) kt.getParametar());
+                            st.setPodaci(listaBris);
+                            break;
+//                        case Konstante.IZLOGUJ_KORISNIKA:
+//                            korisnikUlogovan = (Korisnik) kt.getParametar();
+//                            break;
                         default:
                             kt.getParametar();
                             break;
@@ -113,10 +125,23 @@ public class KlijentNit extends Thread {
             }
 
         } catch (IOException ex) {
-            Logger.getLogger(KlijentNit.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("**********Logout korisnik");
-            Korisnik k = (Korisnik) korinisnik;
-            k.setUlogovan(false);
+            try {
+                Korisnik k = (Korisnik) korinisnik;
+                k.setUlogovan(false);
+
+                List<AbstractObject> lista = Kontroler.getInstance().getListaKorisnika();
+                System.out.println("Dovelo listuuuuu***************************");
+                for (Iterator<AbstractObject> it = lista.iterator(); it.hasNext();) {
+                    Korisnik abstractObject = (Korisnik) it.next();
+                    if (k.equals(abstractObject)) {
+                        System.out.println("Uslo da postavi**********************");
+                        abstractObject.setUlogovan(false);
+                    }
+                }
+                Kontroler.getInstance().setListaKorisnika(lista);
+            } catch (Exception ex1) {
+                Logger.getLogger(KlijentNit.class.getName()).log(Level.SEVERE, null, ex1);
+            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(KlijentNit.class.getName()).log(Level.SEVERE, null, ex);
         }

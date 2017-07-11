@@ -10,14 +10,17 @@ import domen.Korisnik;
 import domen.ParSkija;
 import domen.RezervacijaSkija;
 import java.util.List;
+import so.SOIzlogujKorisnika;
 import so.SOKreirajRezervacijuSkija;
 import so.SOObrisiKorisnika;
 import so.SOObrisiParSkija;
+import so.SOObrisiRezervaciju;
 import so.SOPretraziRezervacije;
 import so.SOPretraziSkijase;
 import so.SOSacuvajKorisnika;
 import so.SOUcitajListuKorisnika;
 import so.SOUcitajListuParovaSkija;
+import so.SOUcitajListuRezervacija;
 import so.SOUcitajListuSkijasa;
 import so.SOUcitajListuTipovaSkija;
 import so.SOUlogujKorisnika;
@@ -33,7 +36,6 @@ public class Kontroler {
     private static Kontroler instance;
     private List<AbstractObject> listaKorisnika;
 
-
     public static Kontroler getInstance() {
         if (instance == null) {
             instance = new Kontroler();
@@ -41,9 +43,7 @@ public class Kontroler {
         return instance;
     }
 
-
-    public void izlogujKorisnika() {
-    } 
+   
 
     public AbstractObject zapamtiParSkija(ParSkija parS) throws Exception {
         SOZapamtiParSkija sozp = new SOZapamtiParSkija(parS);
@@ -57,9 +57,9 @@ public class Kontroler {
         souk.izvrsiOperaciju();
         return souk.getKorisnikUlogovani();
     }
-    
+
     public List<AbstractObject> getListaKorisnika() throws Exception {
-        if(listaKorisnika == null){
+        if (listaKorisnika == null) {
             listaKorisnika = ucitajListuKorisnika();
         }
         return listaKorisnika;
@@ -78,7 +78,7 @@ public class Kontroler {
     private List<AbstractObject> ucitajListuKorisnika() throws Exception {
         SOUcitajListuKorisnika soulk = new SOUcitajListuKorisnika();
         soulk.izvrsiOperaciju();
-        return  soulk.getLista();
+        return soulk.getLista();
     }
 
     public AbstractObject sacuvajKorisnika(Korisnik kor) throws Exception {
@@ -97,11 +97,11 @@ public class Kontroler {
         soops.setParSkija(parSkija);
         soops.izvrsiOperaciju();
         return soops.getLista();
-        
+
     }
 
     public List<AbstractObject> vratiListuParovaSkija() throws Exception {
-        SOUcitajListuParovaSkija soulp= new SOUcitajListuParovaSkija();
+        SOUcitajListuParovaSkija soulp = new SOUcitajListuParovaSkija();
         soulp.izvrsiOperaciju();
         return soulp.getListaParova();
     }
@@ -109,7 +109,7 @@ public class Kontroler {
     public List<AbstractObject> ucitajListuSkijasa() throws Exception {
         SOUcitajListuSkijasa souls = new SOUcitajListuSkijasa();
         souls.izvrsiOperaciju();
-        return  souls.getListaSkijasa();
+        return souls.getListaSkijasa();
     }
 
     public List<AbstractObject> pretraziSkijase(String string) throws Exception {
@@ -132,6 +132,7 @@ public class Kontroler {
         sozr.izvrsiOperaciju();
         return sozr.getRezervacijaSkija();
     }
+
     public List<AbstractObject> pretraziRezervacije(String string) throws Exception {
         SOPretraziRezervacije sopr = new SOPretraziRezervacije();
         sopr.setPretraga(string);
@@ -139,6 +140,22 @@ public class Kontroler {
         return sopr.getLista();
     }
 
- 
+    public List<AbstractObject> ucitajListuRezervacija() throws Exception {
+        SOUcitajListuRezervacija soulr = new SOUcitajListuRezervacija();
+        soulr.izvrsiOperaciju();
+        return soulr.getListaRezervacija();
+    }
+
+    public List<AbstractObject> obrisiRezervaciju(RezervacijaSkija rezervacijaSkija) throws Exception {
+        SOObrisiRezervaciju soobr = new SOObrisiRezervaciju(rezervacijaSkija);
+        soobr.izvrsiOperaciju();
+        return soobr.getLista();
+    }
+
+    public AbstractObject izlogujKorisnika(Korisnik korisnik) {
+        SOIzlogujKorisnika soik = new SOIzlogujKorisnika();
+        soik.setKorisnik(korisnik);
+        return soik.getKorisnik();
+    }
 
 }

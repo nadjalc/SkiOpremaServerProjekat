@@ -28,7 +28,7 @@ public class FrmKorisnici extends javax.swing.JFrame {
     /**
      * Creates new form FrmKorisnici
      */
-    public FrmKorisnici(){
+    public FrmKorisnici() {
         initComponents();
         srediFormu();
         NitOsvezavanja no = new NitOsvezavanja(this);
@@ -208,10 +208,10 @@ public class FrmKorisnici extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             int red = tblKorisnika.getSelectedRow();
-        if(red == -1){
-            JOptionPane.showMessageDialog(this, "Niste izabrali korisnika!");
-            return;
-        }
+            if (red == -1) {
+                JOptionPane.showMessageDialog(this, "Niste izabrali korisnika!");
+                return;
+            }
             Kontroler.getInstance().obrisiKorisnika(listaKorisnika.get(red));
             listaKorisnika.remove(red);
             m.fireTableDataChanged();
@@ -251,9 +251,9 @@ public class FrmKorisnici extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
-                    new FrmKorisnici().setVisible(true);
-                
+
+                new FrmKorisnici().setVisible(true);
+
             }
         });
     }
@@ -294,9 +294,12 @@ public class FrmKorisnici extends javax.swing.JFrame {
         this.tblKorisnika = tblKorisnika;
     }
 
-    public void osveziFormu()  {
+    public void osveziFormu() {
         try {
+            System.out.println("Osvezilo je formu**********************");
+
             listaKorisnika = Kontroler.getInstance().getListaKorisnika();
+            //m = new ModelKorisnika(listaKorisnika);
             m.fireTableDataChanged();
         } catch (Exception ex) {
             System.out.println("Puklo osvezavanje forme");
