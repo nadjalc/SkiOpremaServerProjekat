@@ -9,12 +9,14 @@ import domen.AbstractObject;
 import domen.Korisnik;
 import domen.ParSkija;
 import domen.RezervacijaSkija;
+import domen.StavkaRezervacijeSkija;
 import java.util.List;
 import so.SOIzlogujKorisnika;
 import so.SOKreirajRezervacijuSkija;
 import so.SOObrisiKorisnika;
 import so.SOObrisiParSkija;
 import so.SOObrisiRezervaciju;
+import so.SOObrisiStavkuRezervacije;
 import so.SOPretraziRezervacije;
 import so.SOPretraziSkijase;
 import so.SOSacuvajKorisnika;
@@ -156,6 +158,11 @@ public class Kontroler {
         SOIzlogujKorisnika soik = new SOIzlogujKorisnika();
         soik.setKorisnik(korisnik);
         return soik.getKorisnik();
+    }
+
+    public void obrisiStavkuRezervacije(StavkaRezervacijeSkija stavkaRezervacijeSkija) {
+        SOObrisiStavkuRezervacije soosr = new SOObrisiStavkuRezervacije();
+        soosr.setStavka(stavkaRezervacijeSkija);
     }
 
 }

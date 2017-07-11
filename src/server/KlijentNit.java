@@ -9,6 +9,7 @@ import domen.AbstractObject;
 import domen.Korisnik;
 import domen.ParSkija;
 import domen.RezervacijaSkija;
+import domen.StavkaRezervacijeSkija;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -107,9 +108,9 @@ public class KlijentNit extends Thread {
                             List<AbstractObject> listaBris = Kontroler.getInstance().obrisiRezervaciju((RezervacijaSkija) kt.getParametar());
                             st.setPodaci(listaBris);
                             break;
-//                        case Konstante.IZLOGUJ_KORISNIKA:
-//                            korisnikUlogovan = (Korisnik) kt.getParametar();
-//                            break;
+                        case Konstante.OBRISI_STAVKU_REZERVACIJE:
+                            Kontroler.getInstance().obrisiStavkuRezervacije((StavkaRezervacijeSkija) kt.getParametar());
+                            break;
                         default:
                             kt.getParametar();
                             break;

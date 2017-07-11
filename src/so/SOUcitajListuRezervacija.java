@@ -41,6 +41,15 @@ public class SOUcitajListuRezervacija extends AbstractSo {
                     listaStav.add(s);
                 }
             }
+            for (StavkaRezervacijeSkija stavkaRezervacijeSkija : listaStav) {
+                stavkaRezervacijeSkija.setRezervacijaSkija(r);
+                ParSkija pars = (ParSkija) dbb.vratiObjekatPoKljucu(new ParSkija(), stavkaRezervacijeSkija.getParSkija().getParSkijaID());
+                pars.setTipSkija((TipSkija) dbb.vratiObjekatPoKljucu(new TipSkija(), pars.getTipSkija().getTipSkijaID()));
+                stavkaRezervacijeSkija.setParSkija(pars);
+                r.getListaStavki().add(stavkaRezervacijeSkija);
+                listaStavki.remove(stavkaRezervacijeSkija);
+
+            }
             r.setListaStavki(listaStav);
         }
     }
