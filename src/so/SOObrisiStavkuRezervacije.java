@@ -11,14 +11,15 @@ import domen.StavkaRezervacijeSkija;
  *
  * @author Nadja
  */
-public class SOObrisiStavkuRezervacije extends AbstractSo{
+public class SOObrisiStavkuRezervacije extends AbstractSo {
 
     private StavkaRezervacijeSkija stavka;
-    
-    
+    int status;
+
     @Override
     protected void izvrsiKonkretnuOperaciju() throws Exception {
         dbb.obrisiObjekat(stavka);
+        status = 1;
     }
 
     public StavkaRezervacijeSkija getStavka() {
@@ -28,7 +29,13 @@ public class SOObrisiStavkuRezervacije extends AbstractSo{
     public void setStavka(StavkaRezervacijeSkija stavka) {
         this.stavka = stavka;
     }
-    
-    
-    
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
 }

@@ -160,9 +160,11 @@ public class Kontroler {
         return soik.getKorisnik();
     }
 
-    public void obrisiStavkuRezervacije(StavkaRezervacijeSkija stavkaRezervacijeSkija) {
+    public int obrisiStavkuRezervacije(StavkaRezervacijeSkija stavkaRezervacijeSkija) throws Exception {
         SOObrisiStavkuRezervacije soosr = new SOObrisiStavkuRezervacije();
         soosr.setStavka(stavkaRezervacijeSkija);
+        soosr.izvrsiOperaciju();
+        return soosr.getStatus();
     }
 
 }

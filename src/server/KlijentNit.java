@@ -109,7 +109,8 @@ public class KlijentNit extends Thread {
                             st.setPodaci(listaBris);
                             break;
                         case Konstante.OBRISI_STAVKU_REZERVACIJE:
-                            Kontroler.getInstance().obrisiStavkuRezervacije((StavkaRezervacijeSkija) kt.getParametar());
+                            int status = Kontroler.getInstance().obrisiStavkuRezervacije((StavkaRezervacijeSkija) kt.getParametar());
+                            st.setPodaci(status);
                             break;
                         default:
                             kt.getParametar();

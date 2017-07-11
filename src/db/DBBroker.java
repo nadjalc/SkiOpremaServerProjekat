@@ -35,7 +35,6 @@ public class DBBroker {
 //        }
 //        return instance;
 //    }
-
     public void otvoriKonekciju() {
         try {
             DBUtil dbUtil = new DBUtil();
@@ -149,7 +148,6 @@ public class DBBroker {
                     obj.vratiVrednostPK());
             Statement s = connection.createStatement();
             s.executeUpdate(sql);
-            potvrdiTransakciju();
             s.close();
         } catch (SQLException ex) {
             Logger.getLogger(DBBroker.class.getName()).log(Level.SEVERE, null, ex);
