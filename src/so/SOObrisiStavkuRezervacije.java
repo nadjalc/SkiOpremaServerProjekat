@@ -5,6 +5,7 @@
  */
 package so;
 
+import domen.AbstractObject;
 import domen.StavkaRezervacijeSkija;
 
 /**
@@ -13,12 +14,13 @@ import domen.StavkaRezervacijeSkija;
  */
 public class SOObrisiStavkuRezervacije extends AbstractSo {
 
+    private AbstractObject obrisani;
     private StavkaRezervacijeSkija stavka;
     int status;
 
     @Override
     protected void izvrsiKonkretnuOperaciju() throws Exception {
-        dbb.obrisiObjekat(stavka);
+        obrisani = dbb.obrisiObjekat(stavka);
         status = 1;
     }
 

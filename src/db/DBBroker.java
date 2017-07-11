@@ -144,8 +144,13 @@ public class DBBroker {
 
     public AbstractObject obrisiObjekat(AbstractObject obj) throws Exception {
         try {
-            String sql = String.format("DELETE FROM %s WHERE %s = %s", obj.vratiNazivTabele(), obj.vratiPK(),
-                    obj.vratiVrednostPK());
+            String sql;
+            if (obj.vratiPK() != null) {
+                sql = String.format("DELETE FROM %s WHERE %s = %s", obj.vratiNazivTabele(), obj.vratiPK(),
+                        obj.vratiVrednostPK());
+            } else {
+                sql = String.format("DELETE FROM %s WHERE %s", obj.vratiNazivTabele(), obj.vratiSlozenPK());
+            }
             Statement s = connection.createStatement();
             s.executeUpdate(sql);
             s.close();
