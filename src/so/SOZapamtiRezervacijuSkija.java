@@ -17,13 +17,15 @@ public class SOZapamtiRezervacijuSkija extends AbstractSo{
     private RezervacijaSkija rezervacijaSkija;
     @Override
     protected void izvrsiKonkretnuOperaciju() throws Exception {
-        StavkaRezervacijeSkija nova = new StavkaRezervacijeSkija();
-        nova.setRezervacijaSkija(rezervacijaSkija);
-        dbb.obrisiObjekat(nova);
-        dbb.sacuvajIliIzmeniObjekat(rezervacijaSkija);
+//        StavkaRezervacijeSkija nova = new StavkaRezervacijeSkija();
+//        nova.setRezervacijaSkija(rezervacijaSkija);
+//        dbb.obrisiObjekat(nova);
+        RezervacijaSkija rs = (RezervacijaSkija) dbb.sacuvajIliIzmeniObjekat(rezervacijaSkija);
         for (StavkaRezervacijeSkija stavkaRezervacijeVoznje : rezervacijaSkija.getListaStavki()) {
-            dbb.sacuvajObjekat(stavkaRezervacijeVoznje);
+            stavkaRezervacijeVoznje = (StavkaRezervacijeSkija) dbb.sacuvajIliIzmeniObjekat(stavkaRezervacijeVoznje);
         }
+        rs.setListaStavki(rezervacijaSkija.getListaStavki());
+        rezervacijaSkija = rs;
     }
 
     public RezervacijaSkija getRezervacijaSkija() {

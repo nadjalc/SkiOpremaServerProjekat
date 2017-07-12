@@ -105,6 +105,11 @@ public class DBBroker {
             System.out.println("Stigla lista @@@@@");
             String sqlUpit;
             String tipUpita;
+            for (AbstractObject obj : lista) {
+                System.out.println(obj);
+            }
+            System.out.println("Parametar");
+            System.out.println(parametar);
 
             if (lista.contains(parametar)) {
                 tipUpita = "UPDATE";
@@ -152,6 +157,7 @@ public class DBBroker {
                 sql = String.format("DELETE FROM %s WHERE %s", obj.vratiNazivTabele(), obj.vratiSlozenPK());
             }
             Statement s = connection.createStatement();
+            System.out.println(sql);
             s.executeUpdate(sql);
             s.close();
         } catch (SQLException ex) {
